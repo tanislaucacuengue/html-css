@@ -82,3 +82,33 @@ p{
     text-indent: 4em;
     margin: 10px 0px 10px 0px;
 }
+
+img{
+    max-width: 750px;
+    min-width: 250;
+    display: block;
+    margin: auto;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+#mais{
+    background-color: var(--cor3);
+    padding: 25px;
+    margin: 15px;
+    border-radius: 10px;
+}
+
+#mais>h2{
+    background-color: var(--cor5);
+    margin: 0px;
+    padding: 6px;
+}
+
+footer{
+    background-color: var(--cor1);
+    text-align: center;
+    padding: 5px;
+    font: normal 10pt var(--fonte1);
+
+}
