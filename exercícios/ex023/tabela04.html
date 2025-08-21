@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    body{
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+        font-size: 1.2em;
+    }
+
+    table{
+        border-collapse: collapse;
+        width: 750px;
+    }
+
+    caption{
+        font-size: 0.7em;
+        margin: 5px;
+        color: black;
+        width: 150px;
+        text-align: left;
+
+    }
+
+    th{
+        background-color: #034864a8;
+    }
+
+    td, th{
+        border: 1px solid black;
+        padding: 5px;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+
+    <h1>Minha Tabela</h1>
+
+    <table>
+
+        <caption>Filmes favoritos</caption>
+        <tr>
+            <th scope="col">Grupo</th>
+            <th colspan="2" scope="col">Nomes</th>
+            <th colspan="3" scope="colgroup">Filmes</th>
+        </tr>
+
+        <tr>
+            <th rowspan="3" scope="rowgroup">Homens</th>
+            <td colspan="2">Tanislau José</td>
+            <td>Alien</td>
+            <td>Rambo</td>
+            <td>Vingadores</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">Benjamim Cacuengue</td>
+            <td>Hulk</td>
+            <td>Inception</td>
+            <td>Batman</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">Tomé Adriano</td>
+            <td>Oblivion</td>
+            <td>Matrixn</td>
+            <td>Big Hero</td>
+        </tr>
+
+        <tr>
+            <th rowspan="3" scope="rowgroup">Mulheres</th>
+            <td colspan="2">Rosária Cacuengue</td>
+            <td>Intocáveis </td>
+            <td>Amnésia</td>
+            <td>Gladiador</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">Vilumbo José</td>
+            <td>Wall-E</td>
+            <td>Oldboy</td>
+            <td>Dangal</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">Vilma Cacuengue</td>
+            <td>Star Wars S</td>
+            <td>Taxi Driver</td>
+            <td>Toy Story</td>
+        </tr>
+    </table>
+    
+</body>
+</html>
