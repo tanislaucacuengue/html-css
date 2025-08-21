@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabelas</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.5em;
+        }
+
+        table{
+            border: 2px solid #000;
+            width: 500px;
+            border-collapse: collapse;
+            position: relative;
+        }
+
+        caption{
+            font-size: 0.5em;
+            text-align: left;
+            margin: 5px;
+            font-weight: bolder;
+        }
+
+        thead, tfoot{
+            background-color: #00318bfd;
+            color: #fff;
+        }
+
+        thead>tr>th{
+            position: sticky;
+            top: -1px;
+            background-color: #00318bfd;
+
+        }
+
+        tbody>tr:nth-child(2n-1){
+            background-color: darkgray;
+        }
+
+        th,td{
+            border: 1px solid #000;
+            padding: 10px;
+        }
+
+        td.numero{
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <h1>Uso de Tabelas Grandes</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th scope="col" >Províncias</th>
+                <th scope="col" style="width: 50px;">População</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Luanda</td>
+                <td class="numero">45.919.049</td>
+            </tr>
+
+            <tr>
+                <td>Malange</td>
+                <td class="numero">21.168.791</td>
+            </tr>
+
+            <tr>
+                <td>Huíla</td>
+                <td class="numero">17.264.943</td>
+            </tr>
+
+            <tr>
+                <td>Bengo</td>
+                <td class="numero">45.919.049</td>
+            </tr>
+
+            <tr>
+                <td>Moxíco</td>
+                <td class="numero">21.168.791</td>
+            </tr>
+
+            <tr>
+                <td>Cunene</td>
+                <td class="numero">17.264.943</td>
+            </tr>
+
+            <tr>
+                <td>Lunda Norte</td>
+                <td class="numero">45.919.049</td>
+            </tr>
+
+            <tr>
+                <td>Lunda Sul</td>
+                <td class="numero">21.168.791</td>
+            </tr>
+
+            <tr>
+                <td>Cuando</td>
+                <td class="numero">17.264.943</td>
+            </tr>
+
+            <tr>
+                <td>Cubango</td>
+                <td class="numero">45.919.049</td>
+            </tr>
+
+            <tr>
+                <td>Úige</td>
+                <td class="numero">21.168.791</td>
+            </tr>
+
+            <tr>
+                <td>Íkoli Bengo</td>
+                <td class="numero">17.264.943</td>
+            </tr>
+
+            </tr>
+
+            <tr>
+                <td>Namibe</td>
+                <td class="numero">45.919.049</td>
+            </tr>
+
+            <tr>
+                <td>Zaire</td>
+                <td class="numero">21 168 791</td>
+            </tr>
+
+            <tr>
+                <td>Cabinda</td>
+                <td class="numero">17 264 943</td>
+            </tr>
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <th scope="row">Total de habitantes</th>
+                <td class="numero"><strong>00.000.000</strong></td>
+        </tfoot>
+        <caption>População das Províncias</caption>
+    </table>
+</body>
+</html>
