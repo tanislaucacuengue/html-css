@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js</title>
+</head>
+<body>
+    
+    <a href="#" onclick="clicar()" >Clique em mim</a>
+     <div id="clicou"></div>
+
+
+
+    <script>
+        function clicar() {
+            let s = window.document.getElementById("clicou");
+            s.innerHTML += "<p>Você clicou em mim</p>"
+        }
+    </script>
+</body>
+</html>
