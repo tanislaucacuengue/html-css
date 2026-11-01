@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173a46">
+  <meta name="description" content="Índice responsivo de exercícios e desafios de HTML e CSS de Benjamim Tanislau José Cacuengue.">
+  <title>HTML &amp; CSS — Caderno de aprendizagem | BJ</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #142d34;
+      --ink-soft: #385159;
+      --muted: #5f7175;
+      --paper: #f4f6f3;
+      --surface: #ffffff;
+      --line: #dce5e1;
+      --teal: #246c67;
+      --teal-dark: #173a46;
+      --coral: #e7835a;
+      --sun: #e8bc65;
+      --mint: #b7dfd2;
+      --shadow: 0 16px 42px rgba(15, 47, 54, .08);
+      --radius: 20px;
+      --max: 1180px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 1.5rem; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.6; }
+    a { color: var(--teal); text-underline-offset: .18em; }
+    a:hover { color: #154d4a; }
+    a:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; border-radius: 4px; }
+    .skip-link { position: absolute; left: 1rem; top: -5rem; z-index: 20; background: white; padding: .75rem 1rem; border-radius: 10px; }
+    .skip-link:focus { top: 1rem; }
+    .shell { width: min(calc(100% - 2rem), var(--max)); margin-inline: auto; }
+    .site-header { padding: 1rem 0; }
+    .nav-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .85rem 1.5rem; }
+    .brand { display: inline-flex; align-items: center; gap: .75rem; color: var(--ink); text-decoration: none; font-weight: 800; letter-spacing: -.02em; }
+    .brand-mark { display: grid; place-items: center; width: 2.65rem; aspect-ratio: 1; border-radius: 13px; background: var(--teal-dark); color: white; font-size: .9rem; letter-spacing: .04em; box-shadow: 4px 4px 0 var(--sun); }
+    .brand small { display: block; color: var(--muted); font-size: .7rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: .35rem .95rem; margin: 0; padding: 0; list-style: none; }
+    .nav-links a { color: var(--ink-soft); font-size: .9rem; font-weight: 700; text-decoration: none; }
+    .nav-links a:hover { text-decoration: underline; }
+    .hero { position: relative; overflow: hidden; isolation: isolate; padding: clamp(2rem, 7vw, 5.5rem) 0; color: #f8fbf8; background: linear-gradient(135deg, #173a46 0%, #1e5e5a 58%, #28726b 100%); border-radius: 0 0 30px 30px; }
+    .hero::before, .hero::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; pointer-events: none; }
+    .hero::before { width: 24rem; height: 24rem; right: -8rem; top: -11rem; background: radial-gradient(circle, rgba(232,188,101,.68), rgba(232,188,101,0) 68%); }
+    .hero::after { width: 30rem; height: 30rem; right: 8%; bottom: -25rem; border: 1px solid rgba(255,255,255,.18); box-shadow: 0 0 0 32px rgba(255,255,255,.025), 0 0 0 64px rgba(255,255,255,.025), 0 0 0 96px rgba(255,255,255,.025); }
+    .hero-grid { display: grid; gap: 2rem; align-items: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: .5rem; width: fit-content; padding: .38rem .7rem; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; color: #e8f4ef; font-size: .78rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+    .status-dot { width: .5rem; height: .5rem; border-radius: 50%; background: var(--sun); box-shadow: 0 0 0 4px rgba(232,188,101,.16); }
+    h1 { max-width: 13ch; margin: 1rem 0; font-size: clamp(2.35rem, 8vw, 5.4rem); line-height: .99; letter-spacing: -.065em; }
+    .hero p { max-width: 60ch; margin: .9rem 0; color: #e2eeea; font-size: clamp(1rem, 2vw, 1.15rem); }
+    .hero .accent { color: #ffd48e; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.6rem; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.9rem; padding: .72rem 1rem; border: 1px solid transparent; border-radius: 12px; background: var(--sun); color: #172f35; font-weight: 800; text-decoration: none; transition: transform .18s ease, background-color .18s ease; }
+    .button:hover { transform: translateY(-2px); background: #f0ca7a; color: #172f35; }
+    .button.secondary { border-color: rgba(255,255,255,.4); background: transparent; color: #fff; }
+    .button.secondary:hover { background: rgba(255,255,255,.1); }
+    .hero-note { display: grid; gap: .5rem; max-width: 23rem; padding: 1.15rem; border: 1px solid rgba(255,255,255,.2); border-radius: var(--radius); background: rgba(8,32,40,.24); backdrop-filter: blur(8px); }
+    .hero-note strong { color: #ffe0a1; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
+    .hero-note p { margin: 0; font-size: .95rem; }
+    .hero-note .mini-mark { display: flex; align-items: center; gap: .7rem; color: #f4faf7; font-weight: 750; }
+    .mini-mark span { display: grid; place-items: center; width: 2.3rem; height: 2.3rem; border-radius: 10px; background: var(--coral); color: white; font-size: .8rem; }
+    main { padding: 2rem 0 4rem; }
+    .section { margin-top: clamp(2.75rem, 7vw, 5rem); scroll-margin-top: 1rem; }
+    .section-heading { display: flex; flex-direction: column; gap: .45rem; margin-bottom: 1.2rem; }
+    .kicker { margin: 0; color: var(--teal); font-size: .76rem; font-weight: 850; letter-spacing: .13em; text-transform: uppercase; }
+    h2 { margin: 0; font-size: clamp(1.65rem, 4vw, 2.55rem); line-height: 1.12; letter-spacing: -.04em; }
+    .section-heading > p:last-child { max-width: 72ch; margin: .2rem 0 0; color: var(--muted); }
+    .catalog-grid { display: grid; grid-template-columns: 1fr; gap: .9rem; }
+    .catalog-card { display: flex; flex-direction: column; min-width: 0; padding: 1.15rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: 0 8px 22px rgba(15,47,54,.035); transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+    .catalog-card:hover { border-color: #a7c9bd; box-shadow: var(--shadow); transform: translateY(-2px); }
+    .card-topline { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; margin-bottom: .65rem; }
+    .code-label { color: var(--teal); font-size: .75rem; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+    .card-count { padding: .22rem .55rem; border-radius: 999px; background: #edf4ef; color: var(--ink-soft); font-size: .72rem; font-weight: 750; }
+    .catalog-card h3 { margin: 0; font-size: 1.16rem; line-height: 1.25; letter-spacing: -.02em; }
+    .catalog-card > p { flex: 1; margin: .55rem 0 1rem; color: var(--muted); font-size: .92rem; }
+    .card-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem; margin-top: auto; }
+    .page-link { display: inline-flex; align-items: center; min-height: 2.4rem; padding: .45rem .7rem; border-radius: 9px; background: #e9f3ef; color: #174f4b; font-size: .85rem; font-weight: 800; text-decoration: none; }
+    .page-link:hover { background: #d8eae3; text-decoration: underline; }
+    .page-details { width: 100%; margin-top: .1rem; }
+    .page-details summary { width: fit-content; padding: .25rem 0; color: var(--teal); cursor: pointer; font-size: .83rem; font-weight: 750; }
+    .page-links { display: grid; gap: .42rem; margin: .45rem 0 .1rem; padding-left: 1.1rem; }
+    .page-links li { color: var(--muted); }
+    .page-links a { font-size: .86rem; }
+    .filter-panel { display: grid; gap: .4rem; margin: 1rem 0 1.1rem; }
+    .filter-panel label { font-size: .83rem; font-weight: 800; }
+    .filter-panel input { width: 100%; min-height: 3rem; padding: .7rem .9rem; border: 1px solid #aabcb7; border-radius: 12px; background: white; color: var(--ink); font: inherit; }
+    .filter-status { min-height: 1.3rem; margin: .1rem 0 0; color: var(--muted); font-size: .8rem; }
+    .note { margin: 1rem 0 0; padding: .9rem 1rem; border-left: 4px solid var(--coral); border-radius: 0 12px 12px 0; background: #fff5ee; color: #573b30; }
+    .resource-panel { padding: 1.1rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+    .resource-panel + .resource-panel { margin-top: .9rem; }
+    .resource-panel h3 { margin: 0 0 .5rem; font-size: 1.1rem; }
+    .resource-list { display: grid; grid-template-columns: 1fr; gap: .45rem 1rem; margin: .65rem 0 0; padding: 0; list-style: none; }
+    .resource-list li { display: flex; align-items: start; justify-content: space-between; gap: .7rem; padding: .55rem 0; border-bottom: 1px solid #edf0ee; }
+    .resource-list a { min-width: 0; overflow-wrap: anywhere; }
+    .resource-list span { flex: 0 0 auto; color: var(--muted); font-size: .69rem; font-weight: 800; letter-spacing: .06em; }
+    .folder-links { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: .9rem; }
+    .folder-links a { padding: .48rem .72rem; border: 1px solid var(--line); border-radius: 999px; background: #f7faf8; font-size: .82rem; font-weight: 750; text-decoration: none; }
+    .folder-links a:hover { border-color: #9cbfb3; background: #edf4ef; }
+    .empty-state { margin: 1rem 0 0; padding: 1rem; border: 1px dashed #9bb6ac; border-radius: 12px; color: var(--muted); }
+    .site-footer { padding: 1.6rem 0 2.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
+    .footer-row { display: flex; flex-direction: column; gap: .45rem; }
+    .site-footer strong { color: var(--ink); }
+    [hidden] { display: none !important; }
+    .motion-ready [data-reveal] { opacity: 1; transform: none; }
+    .motion-ready [data-reveal].is-visible { animation: reveal-in .38s ease-out; }
+    @keyframes reveal-in { from { opacity: .86; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @media (min-width: 620px) {
+      .hero-grid { grid-template-columns: minmax(0,1fr) minmax(15rem,.65fr); }
+      .catalog-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .resource-list { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .section-heading { flex-direction: row; flex-wrap: wrap; align-items: end; justify-content: space-between; }
+      .section-heading > p:last-child { flex-basis: 100%; }
+      .footer-row { flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+    }
+    @media (min-width: 960px) {
+      .catalog-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; }
+      .filter-panel { max-width: 34rem; }
+      .hero-grid { grid-template-columns: minmax(0,1fr) 22rem; gap: 4rem; }
+    }
+    @media (max-width: 420px) {
+      .shell { width: min(calc(100% - 1.25rem), var(--max)); }
+      .nav-row { align-items: flex-start; }
+      .nav-links { width: 100%; gap: .2rem .8rem; }
+      .nav-links a { font-size: .83rem; }
+      .hero { border-radius: 0 0 22px 22px; }
+      .catalog-card { padding: 1rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .motion-ready [data-reveal] { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
+  <header class="site-header">
+    <div class="shell nav-row">
+      <a class="brand" href="#topo" aria-label="Página inicial do caderno HTML e CSS">
+        <span class="brand-mark" aria-hidden="true">BJ</span>
+        <span>HTML &amp; CSS<small>Caderno de aprendizagem</small></span>
+      </a>
+      <nav aria-label="Navegação principal">
+        <ul class="nav-links">
+          <li><a href="#exercicios">Exercícios</a></li>
+          <li><a href="#desafios">Desafios</a></li>
+          <li><a href="#materiais">Materiais</a></li>
+          <li><a href="./README.md">README</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <section class="hero" id="topo">
+    <div class="shell hero-grid">
+      <div>
+        <span class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Percurso em construção</span>
+        <h1>Aprender, praticar e <span class="accent">construir.</span></h1>
+        <p>Exercícios e desafios pessoais de HTML5 e CSS3, organizados num só lugar. Este caderno acompanha uma aprendizagem em progresso — não representa o curso completo.</p>
+        <div class="hero-actions">
+          <a class="button" href="#exercicios">Explorar exercícios</a>
+          <a class="button secondary" href="#desafios">Ver desafios</a>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="Informação sobre o percurso">
+        <strong>Em evolução contínua</strong>
+        <p>Estou a concluir o módulo 3 do curso de HTML e CSS de Gustavo Guanabara. Os módulos 4 e 5 serão acrescentados progressivamente, à medida que avanço.</p>
+        <div class="mini-mark"><span aria-hidden="true">BJ</span> Benjamim Tanislau José Cacuengue</div>
+      </aside>
+    </div>
+  </section>
+  <main class="shell" id="conteudo">
+    <section class="section" id="exercicios" aria-labelledby="titulo-exercicios">
+      <div class="section-heading">
+        <div><p class="kicker">01 / Prática</p><h2 id="titulo-exercicios">Exercícios</h2></div>
+        <p>Escolhe uma pasta para abrir a página principal. Quando existem várias páginas, expande a lista para aceder a cada uma.</p>
+      </div>
+      <p class="note">O índice reflecte as pastas presentes nesta versão do repositório. A numeração e os conteúdos poderão crescer à medida que o curso continua.</p>
+      <div class="filter-panel" data-filter-controls hidden>
+        <label for="catalog-search">Pesquisar exercícios, desafios ou materiais</label>
+        <input id="catalog-search" type="search" placeholder="Por exemplo: tabelas, fontes, PDF" autocomplete="off">
+        <p class="filter-status" id="filter-status" aria-live="polite"></p>
+      </div>
+      <div class="catalog-grid" id="exercise-grid">
+        <article class="catalog-card" data-searchable data-search="ex001 primeira página um primeiro documento html e a apresentação de uma mensagem. meu 1º exercício index.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex001</span><span class="card-count">1 página</span></div>
+      <h3>Primeira página</h3>
+      <p>Um primeiro documento HTML e a apresentação de uma mensagem.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex001/index.html">Abrir exercício</a></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex002 parágrafos e quebras de linha estruturação de texto com parágrafos e quebras de linha. parágrafos index.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex002</span><span class="card-count">1 página</span></div>
+      <h3>Parágrafos e quebras de linha</h3>
+      <p>Estruturação de texto com parágrafos e quebras de linha.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex002/index.html">Abrir exercício</a></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex003 imagens carregamento de imagens locais numa página html. teste com imagens index.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex003</span><span class="card-count">1 página</span></div>
+      <h3>Imagens</h3>
+      <p>Carregamento de imagens locais numa página HTML.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex003/index.html">Abrir exercício</a></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex004 favicon configuração e apresentação de um ícone de página. teste com favicon index.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex004</span><span class="card-count">1 página</span></div>
+      <h3>Favicon</h3>
+      <p>Configuração e apresentação de um ícone de página.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex004/index.html">Abrir exercício</a></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex005 símbolos e emojis uso de símbolos e emojis em conteúdo html. simbolos e emojis index.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex005</span><span class="card-count">1 página</span></div>
+      <h3>Símbolos e emojis</h3>
+      <p>Uso de símbolos e emojis em conteúdo HTML.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex005/index.html">Abrir exercício</a></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex006 hierarquia de títulos organização de títulos e subtítulos. hierarquia de tituli index.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex006</span><span class="card-count">1 página</span></div>
+      <h3>Hierarquia de títulos</h3>
+      <p>Organização de títulos e subtítulos.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex006/index.html">Abrir exercício</a></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex007 html4 e html5 comparação de exemplos e semântica entre versões de html. meu site html4 exemplo de semantica html4.html html5.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex007</span><span class="card-count">2 páginas</span></div>
+      <h3>HTML4 e HTML5</h3>
+      <p>Comparação de exemplos e semântica entre versões de HTML.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex007/html5.html">Abrir exercício</a><details class="page-details"><summary>Ver todas as 2 páginas</summary>
+        <ul class="page-links">
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex007/html4.html">Exemplo HTML4</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex007/html5.html">Exemplo HTML5</a></li>
+        </ul>
+      </details></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex008 formatação de texto elementos para destacar e formatar texto. formatação de texto index.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex008</span><span class="card-count">1 página</span></div>
+      <h3>Formatação de texto</h3>
+      <p>Elementos para destacar e formatar texto.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex008/index.html">Abrir exercício</a></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex008.1 outras formatações exemplos adicionais de formatação de texto. outras formatações index.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex008.1</span><span class="card-count">1 página</span></div>
+      <h3>Outras formatações</h3>
+      <p>Exemplos adicionais de formatação de texto.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex008.1/index.html">Abrir exercício</a></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex009 listas criação e organização de listas. listas index.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex009</span><span class="card-count">1 página</span></div>
+      <h3>Listas</h3>
+      <p>Criação e organização de listas.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex009/index.html">Abrir exercício</a></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex010 ligações e navegação ligações internas, externas e navegação entre páginas. tabalhando com links segunda pg terceira página index.html pg002.html pg003.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex010</span><span class="card-count">3 páginas</span></div>
+      <h3>Ligações e navegação</h3>
+      <p>Ligações internas, externas e navegação entre páginas.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex010/index.html">Abrir exercício</a><details class="page-details"><summary>Ver todas as 3 páginas</summary>
+        <ul class="page-links">
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex010/index.html">Página principal</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex010/pg002.html">Página 2</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex010/noticia/pg003.html">Página 3</a></li>
+        </ul>
+      </details></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex011 imagens e media imagens em html e prática com imagens adaptáveis. mídias em html5 mídia type index.html index.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex011</span><span class="card-count">2 páginas</span></div>
+      <h3>Imagens e media</h3>
+      <p>Imagens em HTML e prática com imagens adaptáveis.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex011/index.html">Abrir exercício</a><details class="page-details"><summary>Ver todas as 2 páginas</summary>
+        <ul class="page-links">
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex011/index.html">Página principal</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex011/Pr%C3%A1tica/index.html">Página principal — prática</a></li>
+        </ul>
+      </details></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex013 estilos em linha aplicação de estilos directamente nos elementos html. estilos em linhas index.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex013</span><span class="card-count">1 página</span></div>
+      <h3>Estilos em linha</h3>
+      <p>Aplicação de estilos directamente nos elementos HTML.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex013/index.html">Abrir exercício</a></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex014 estilos internos aplicação de estilos locais/internos no documento. estilos locais / internos index.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex014</span><span class="card-count">1 página</span></div>
+      <h3>Estilos internos</h3>
+      <p>Aplicação de estilos locais/internos no documento.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex014/index.html">Abrir exercício</a></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex015 estilos externos ligação de folhas de estilo externas e páginas associadas. estilos externos segunda página index.html pg02.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex015</span><span class="card-count">2 páginas</span></div>
+      <h3>Estilos externos</h3>
+      <p>Ligação de folhas de estilo externas e páginas associadas.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex015/index.html">Abrir exercício</a><details class="page-details"><summary>Ver todas as 2 páginas</summary>
+        <ul class="page-links">
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex015/index.html">Página principal</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex015/pg02.html">Página 2</a></li>
+        </ul>
+      </details></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex016 cores e gradientes exemplos de cores e gradientes em css. cores css gradiente em css gradiente em css exemplo de um site cor01.html cor02.html cor02.1.html cor03.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex016</span><span class="card-count">4 páginas</span></div>
+      <h3>Cores e gradientes</h3>
+      <p>Exemplos de cores e gradientes em CSS.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex016/cor01.html">Abrir exercício</a><details class="page-details"><summary>Ver todas as 4 páginas</summary>
+        <ul class="page-links">
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex016/cor01.html">Exemplo de cores/gradientes 01</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex016/cor02.html">Exemplo de cores/gradientes 02</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex016/cor02.1.html">Exemplo de cores/gradientes 02.1</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex016/cor03.html">Exemplo de cores/gradientes 03</a></li>
+        </ul>
+      </details></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex017 fontes e alinhamentos experiências com fontes e alinhamento de texto. fontes em css fontes em css alinhamentos fonte01.html fonte01.1.html fonte02.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex017</span><span class="card-count">3 páginas</span></div>
+      <h3>Fontes e alinhamentos</h3>
+      <p>Experiências com fontes e alinhamento de texto.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex017/fonte01.html">Abrir exercício</a><details class="page-details"><summary>Ver todas as 3 páginas</summary>
+        <ul class="page-links">
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex017/fonte01.html">Exemplo de fontes 01</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex017/fonte01.1.html">Exemplo de fontes 01.1</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex017/fonte02.html">Exemplo de fontes 02</a></li>
+        </ul>
+      </details></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex018 fontes externas exemplo de utilização de uma fonte externa/local. fonte externa fonte02.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex018</span><span class="card-count">1 página</span></div>
+      <h3>Fontes externas</h3>
+      <p>Exemplo de utilização de uma fonte externa/local.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex018/fonte02.html">Abrir exercício</a></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex019 seletores personalizados selecção de elementos e classes em html/css. seletores personalizados seletor01.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex019</span><span class="card-count">1 página</span></div>
+      <h3>Seletores personalizados</h3>
+      <p>Selecção de elementos e classes em HTML/CSS.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex019/seletor01.html">Abrir exercício</a></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex020 pseudo-classes e ligações estados interactivos e personalização de ligações. exemplo de houver links pseudo-classes houver.html links.html pseudoclasse.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex020</span><span class="card-count">3 páginas</span></div>
+      <h3>Pseudo-classes e ligações</h3>
+      <p>Estados interactivos e personalização de ligações.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex020/pseudoclasse.html">Abrir exercício</a><details class="page-details"><summary>Ver todas as 3 páginas</summary>
+        <ul class="page-links">
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex020/houver.html">Exemplo de hover</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex020/links.html">Personalização de ligações</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex020/pseudoclasse.html">Exemplo de pseudo-classes</a></li>
+        </ul>
+      </details></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex021 modelo de caixas modelo de caixas e agrupamento semântico de elementos. modelo de caixas grouping tags grouping tags caixa01.html caixa02.html caixa02.1.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex021</span><span class="card-count">3 páginas</span></div>
+      <h3>Modelo de caixas</h3>
+      <p>Modelo de caixas e agrupamento semântico de elementos.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex021/caixa01.html">Abrir exercício</a><details class="page-details"><summary>Ver todas as 3 páginas</summary>
+        <ul class="page-links">
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex021/caixa01.html">Modelo de caixas — exemplo 01</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex021/caixa02.html">Modelo de caixas — exemplo 02</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex021/caixa02.1.html">Modelo de caixas — exemplo 02.1</a></li>
+        </ul>
+      </details></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex022 imagens de fundo posicionamento, tamanho e alinhamento de fundos. teste com imagem de fundo personalizando os fundos trabalhando na posição de fundos posicinamento entendendo posicionamento trabalhando o tamanho e redimencionamento alinhamento vertical fundo001.html fundo002.html fundo003.html fundo004.html fundo005.html fundo006.html fundo007.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex022</span><span class="card-count">7 páginas</span></div>
+      <h3>Imagens de fundo</h3>
+      <p>Posicionamento, tamanho e alinhamento de fundos.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex022/fundo001.html">Abrir exercício</a><details class="page-details"><summary>Ver todas as 7 páginas</summary>
+        <ul class="page-links">
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex022/fundo001.html">Exemplo de imagem de fundo 1</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex022/fundo002.html">Exemplo de imagem de fundo 2</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex022/fundo003.html">Exemplo de imagem de fundo 3</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex022/fundo004.html">Exemplo de imagem de fundo 4</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex022/fundo005.html">Exemplo de imagem de fundo 5</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex022/fundo006.html">Exemplo de imagem de fundo 6</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex022/fundo007.html">Exemplo de imagem de fundo 7</a></li>
+        </ul>
+      </details></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex023 tabelas estrutura, células agrupadas e adaptação de tabelas. tabelas tabelas mesclagem de celulas document exercícios de tabelas tabelas responsivas tabela01.html tabela02.html tabela03.html tabela04.html tabela05.html tabela06.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex023</span><span class="card-count">6 páginas</span></div>
+      <h3>Tabelas</h3>
+      <p>Estrutura, células agrupadas e adaptação de tabelas.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex023/tabela01.html">Abrir exercício</a><details class="page-details"><summary>Ver todas as 6 páginas</summary>
+        <ul class="page-links">
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex023/tabela01.html">Exemplo de tabela 1</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex023/tabela02.html">Exemplo de tabela 2</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex023/tabela03.html">Exemplo de tabela 3</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex023/tabela04.html">Exemplo de tabela 4</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex023/tabela05.html">Exemplo de tabela 5</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex023/tabela06.html">Exemplo de tabela 6</a></li>
+        </ul>
+      </details></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex024 iframes experiências de incorporação de páginas e conteúdos. site de teste estudos de iframe trabalhando com iframes exemplo document exemplo main site(iframes) formulário script with iframe js adicionando conteúdos site.html iframe01.html iframe02.html site2.html iframe03.html site3.html iframe04.html site4.html iframe05.html site5.html iframe06.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex024</span><span class="card-count">11 páginas</span></div>
+      <h3>Iframes</h3>
+      <p>Experiências de incorporação de páginas e conteúdos.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex024/iframe01.html">Abrir exercício</a><details class="page-details"><summary>Ver todas as 11 páginas</summary>
+        <ul class="page-links">
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex024/paginas_extras/site.html">Página adicional — site</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex024/iframe01.html">Exemplo de iframe 1</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex024/iframe02.html">Exemplo de iframe 2</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex024/paginas_extras/site2.html">Página adicional — site 2</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex024/iframe03.html">Exemplo de iframe 3</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex024/paginas_extras/site3.html">Página adicional — site 3</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex024/iframe04.html">Exemplo de iframe 4</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex024/paginas_extras/site4.html">Página adicional — site 4</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex024/iframe05.html">Exemplo de iframe 5</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex024/paginas_extras/site5.html">Página adicional — site 5</a></li>
+          <li><a class="page-link" href="./exerc%C3%ADcios/ex024/iframe06.html">Exemplo de iframe 6</a></li>
+        </ul>
+      </details></div>
+    </article>
+<article class="catalog-card" data-searchable data-search="ex025 projecto redes sociais página de projecto com ligações para redes sociais. projecto redes sociais index.html" data-reveal>
+      <div class="card-topline"><span class="code-label">ex025</span><span class="card-count">1 página</span></div>
+      <h3>Projecto Redes Sociais</h3>
+      <p>Página de projecto com ligações para redes sociais.</p>
+      <div class="card-actions"><a class="page-link" href="./exerc%C3%ADcios/ex025/Redes%20Sociais/index.html">Abrir exercício</a></div>
+    </article>
+      </div>
+      <p class="empty-state" data-no-results hidden>Não encontrei itens com esse termo. Tenta outra palavra ou número.</p>
+    </section>
+    <section class="section" id="desafios" aria-labelledby="titulo-desafios">
+      <div class="section-heading">
+        <div><p class="kicker">02 / Aplicação</p><h2 id="titulo-desafios">Desafios</h2></div>
+        <p>Páginas práticas e pequenos projectos identificados na pasta <code>desafio/</code>.</p>
+      </div>
+      <div class="catalog-grid"><article class="catalog-card challenge-card" data-searchable data-search="001 página pessoal e redes sociais página de apresentação com ligações para redes sociais. desafio index.html" data-reveal>
+      <div class="card-topline"><span class="code-label">Desafio 001</span><span class="card-count">1 página</span></div>
+      <h3>Página pessoal e redes sociais</h3>
+      <p>Página de apresentação com ligações para redes sociais.</p>
+      <div class="card-actions"><a class="page-link" href="./desafio/001/index.html">Abrir desafio</a></div>
+    </article>
+<article class="catalog-card challenge-card" data-searchable data-search="002 tags html exemplos de elementos e tags html. desafio 2 index.html" data-reveal>
+      <div class="card-topline"><span class="code-label">Desafio 002</span><span class="card-count">1 página</span></div>
+      <h3>Tags HTML</h3>
+      <p>Exemplos de elementos e tags HTML.</p>
+      <div class="card-actions"><a class="page-link" href="./desafio/002/index.html">Abrir desafio</a></div>
+    </article>
+<article class="catalog-card challenge-card" data-searchable data-search="010 mascote android e responsividade artigo sobre a mascote android e uma página de teste responsivo. como surgiu o mascote do android? teste de responsividade android.html responsivo.html" data-reveal>
+      <div class="card-topline"><span class="code-label">Desafio 010</span><span class="card-count">2 páginas</span></div>
+      <h3>Mascote Android e responsividade</h3>
+      <p>Artigo sobre a mascote Android e uma página de teste responsivo.</p>
+      <div class="card-actions"><a class="page-link" href="./desafio/010/android.html">Abrir desafio</a><details class="page-details"><summary>Ver todas as 2 páginas</summary>
+        <ul class="page-links">
+          <li><a class="page-link" href="./desafio/010/android.html">Artigo sobre Android</a></li>
+          <li><a class="page-link" href="./desafio/010/responsivo.html">Teste de responsividade</a></li>
+        </ul>
+      </details></div>
+    </article>
+<article class="catalog-card challenge-card" data-searchable data-search="011 composição espacial projecto visual com tema de astronauta e espaço. astronauta index.html" data-reveal>
+      <div class="card-topline"><span class="code-label">Desafio 011</span><span class="card-count">1 página</span></div>
+      <h3>Composição espacial</h3>
+      <p>Projecto visual com tema de astronauta e espaço.</p>
+      <div class="card-actions"><a class="page-link" href="./desafio/011/index.html">Abrir desafio</a></div>
+    </article>
+<article class="catalog-card challenge-card" data-searchable data-search="012 cordel moderno página associada ao projecto cordel moderno. cordel moderno index.html" data-reveal>
+      <div class="card-topline"><span class="code-label">Desafio 012</span><span class="card-count">1 página</span></div>
+      <h3>Cordel Moderno</h3>
+      <p>Página associada ao projecto Cordel Moderno.</p>
+      <div class="card-actions"><a class="page-link" href="./desafio/012/index.html">Abrir desafio</a></div>
+    </article>
+<article class="catalog-card challenge-card" data-searchable data-search="013 desafios de tabelas três páginas com exercícios de tabelas. desafio 1 desafio 2 document des01.html des02.html des03.html" data-reveal>
+      <div class="card-topline"><span class="code-label">Desafio 013</span><span class="card-count">3 páginas</span></div>
+      <h3>Desafios de tabelas</h3>
+      <p>Três páginas com exercícios de tabelas.</p>
+      <div class="card-actions"><a class="page-link" href="./desafio/013/des01.html">Abrir desafio</a><details class="page-details"><summary>Ver todas as 3 páginas</summary>
+        <ul class="page-links">
+          <li><a class="page-link" href="./desafio/013/des01.html">Tabela — desafio 1</a></li>
+          <li><a class="page-link" href="./desafio/013/des02.html">Tabela — desafio 2</a></li>
+          <li><a class="page-link" href="./desafio/013/des03.html">Tabela — desafio 3</a></li>
+        </ul>
+      </details></div>
+    </article>
+<article class="catalog-card challenge-card" data-searchable data-search="014 pacote de recursos a pasta contém um pacote zip e recursos; não foi encontrada uma página html neste estado do repositório. pacote-d013.zip" data-reveal>
+      <div class="card-topline"><span class="code-label">Desafio 014</span><span class="card-count">Pacote de recursos</span></div>
+      <h3>Pacote de recursos</h3>
+      <p>A pasta contém um pacote ZIP e recursos; não foi encontrada uma página HTML neste estado do repositório.</p>
+      <div class="card-actions"><a class="page-link" href="./desafio/014/pacote-d013.zip">Transferir pacote de recursos</a></div>
+    </article>
+<article class="catalog-card challenge-card" data-searchable data-search="prática site web html css fundo astronauta" data-reveal>
+      <div class="card-topline"><span class="code-label">Prática</span><span class="card-count">1 página</span></div>
+      <h3>Página de prática</h3><p>Exercício HTML/CSS disponível na pasta de práticas.</p>
+      <div class="card-actions"><a class="page-link" href="./desafio/pdf/_praticas/index.html">Abrir página de prática</a></div>
+    </article></div>
+      <p class="note">As pastas 003–009 não aparecem nesta cópia do repositório; o índice não presume o motivo nem o conteúdo desses números.</p>
+    </section>
+    <section class="section" id="materiais" aria-labelledby="titulo-materiais">
+      <div class="section-heading">
+        <div><p class="kicker">03 / Consulta</p><h2 id="titulo-materiais">Materiais e recursos</h2></div>
+        <p>Acesso directo aos documentos e ficheiros de apoio actualmente guardados no repositório.</p>
+      </div>
+      <div class="resource-panel" data-reveal>
+        <h3>PDFs de apoio</h3>
+        <ul class="resource-list"><li data-searchable data-search="01 - história da internet pdf curso html css"><a href="./pdf/01%20-%20Hist%C3%B3ria%20da%20Internet.pdf">01 - História da Internet</a><span>PDF</span></li><li data-searchable data-search="02 - como funciona a internet pdf curso html css"><a href="./pdf/02%20-%20Como%20funciona%20a%20Internet.pdf">02 - Como funciona a Internet</a><span>PDF</span></li><li data-searchable data-search="03 - como funciona html e css pdf curso html css"><a href="./pdf/03%20-%20Como%20funciona%20HTML%20e%20CSS.pdf">03 - Como funciona HTML e CSS</a><span>PDF</span></li><li data-searchable data-search="04 - primeiros passos html pdf curso html css"><a href="./pdf/04%20-%20Primeiros%20passos%20HTML.pdf">04 - Primeiros passos HTML</a><span>PDF</span></li><li data-searchable data-search="05 - caracteres, parágrafos e quebras de linha pdf curso html css"><a href="./pdf/05%20-%20Caracteres%2C%20par%C3%A1grafos%20e%20quebras%20de%20linha.pdf">05 - Caracteres, parágrafos e quebras de linha</a><span>PDF</span></li><li data-searchable data-search="06 - imagens e favicon pdf curso html css"><a href="./pdf/06%20-%20Imagens%20e%20Favicon.pdf">06 - Imagens e Favicon</a><span>PDF</span></li><li data-searchable data-search="07 - hierarquia de títulos pdf curso html css"><a href="./pdf/07%20-%20Hierarquia%20de%20t%C3%ADtulos.pdf">07 - Hierarquia de títulos</a><span>PDF</span></li><li data-searchable data-search="08 - formatação de textos pdf curso html css"><a href="./pdf/08%20-%20Formata%C3%A7%C3%A3o%20de%20Textos.pdf">08 - Formatação de Textos</a><span>PDF</span></li><li data-searchable data-search="09 - listas html pdf curso html css"><a href="./pdf/09%20-%20Listas%20HTML.pdf">09 - Listas HTML</a><span>PDF</span></li><li data-searchable data-search="10 - ligações em toda parte pdf curso html css"><a href="./pdf/10%20-%20Liga%C3%A7%C3%B5es%20em%20toda%20parte.pdf">10 - Ligações em toda parte</a><span>PDF</span></li><li data-searchable data-search="11 - imagens dinâmicas, áudios e vídeos pdf curso html css"><a href="./pdf/11%20-%20Imagens%20din%C3%A2micas%2C%20%C3%A1udios%20e%20v%C3%ADdeos.pdf">11 - Imagens dinâmicas, áudios e vídeos</a><span>PDF</span></li><li data-searchable data-search="12 - trabalhando com estilos pdf curso html css"><a href="./pdf/12%20-%20Trabalhando%20com%20estilos.pdf">12 - Trabalhando com estilos</a><span>PDF</span></li><li data-searchable data-search="13 - cores pdf curso html css"><a href="./pdf/13%20-%20Cores.pdf">13 - Cores</a><span>PDF</span></li><li data-searchable data-search="14 - fontes pdf curso html css"><a href="./pdf/14%20-%20Fontes.pdf">14 - Fontes</a><span>PDF</span></li><li data-searchable data-search="15 -seletores personalizados pdf curso html css"><a href="./pdf/15%20-Seletores%20personalizados.pdf">15 -Seletores personalizados</a><span>PDF</span></li><li data-searchable data-search="16 - modelo de caixas pdf curso html css"><a href="./pdf/16%20-%20Modelo%20de%20Caixas.pdf">16 - Modelo de Caixas</a><span>PDF</span></li><li data-searchable data-search="17 - primeiro mini-projeto pdf curso html css"><a href="./pdf/17%20-%20Primeiro%20mini-projeto.pdf">17 - Primeiro mini-projeto</a><span>PDF</span></li><li data-searchable data-search="18 - aprendendo git e github pdf curso html css"><a href="./pdf/18%20-%20Aprendendo%20Git%20e%20GitHub.pdf">18 - Aprendendo Git e GitHub</a><span>PDF</span></li><li data-searchable data-search="19 - imagens de fundo pdf curso html css"><a href="./pdf/19%20-%20Imagens%20de%20Fundo.pdf">19 - Imagens de Fundo</a><span>PDF</span></li><li data-searchable data-search="20 - mini-projeto cordel pdf curso html css"><a href="./pdf/20%20-%20Mini-projeto%20Cordel.pdf">20 - Mini-projeto Cordel</a><span>PDF</span></li></ul>
+        <div class="folder-links"><a href="./pdf/README.md">Ver índice da pasta PDF</a></div>
+      </div>
+      <div class="resource-panel" data-reveal>
+        <h3>Recursos multimédia</h3>
+        <p>Imagens e vídeos de apoio organizados em <code>multi_midia/</code>. A finalidade de cada ficheiro não é inferida apenas pelo nome.</p>
+        <ul class="resource-list"><li data-searchable data-search="adobecolor-my color theme.jpeg recursos multimédia"><a href="./multi_midia/img/AdobeColor-My%20Color%20Theme.jpeg">AdobeColor-My Color Theme.jpeg</a><span>JPEG</span></li><li data-searchable data-search="screenshot_25680720_125510.jpg recursos multimédia"><a href="./multi_midia/img/Screenshot_25680720_125510.jpg">Screenshot_25680720_125510.jpg</a><span>JPG</span></li><li data-searchable data-search="screenshot_25680720_160051.jpg recursos multimédia"><a href="./multi_midia/img/Screenshot_25680720_160051.jpg">Screenshot_25680720_160051.jpg</a><span>JPG</span></li><li data-searchable data-search="screenshot_25680720_160138.jpg recursos multimédia"><a href="./multi_midia/img/Screenshot_25680720_160138.jpg">Screenshot_25680720_160138.jpg</a><span>JPG</span></li><li data-searchable data-search="screenshot_25680720_160155.jpg recursos multimédia"><a href="./multi_midia/img/Screenshot_25680720_160155.jpg">Screenshot_25680720_160155.jpg</a><span>JPG</span></li><li data-searchable data-search="modelo-horizontal.png recursos multimédia"><a href="./multi_midia/img/modelo-horizontal.png">modelo-horizontal.png</a><span>PNG</span></li><li data-searchable data-search="modelo-quadrado.png recursos multimédia"><a href="./multi_midia/img/modelo-quadrado.png">modelo-quadrado.png</a><span>PNG</span></li><li data-searchable data-search="modelo-vertical.png recursos multimédia"><a href="./multi_midia/img/modelo-vertical.png">modelo-vertical.png</a><span>PNG</span></li><li data-searchable data-search="pdf-icon.png recursos multimédia"><a href="./multi_midia/img/pdf-icon.png">pdf-icon.png</a><span>PNG</span></li><li data-searchable data-search="vscode-icon.png recursos multimédia"><a href="./multi_midia/img/vscode-icon.png">vscode-icon.png</a><span>PNG</span></li><li data-searchable data-search="o_que_é_e_como_funciona_a_internet.mp4 recursos multimédia"><a href="./multi_midia/video/O_que_%C3%A9_e_como_funciona_a_internet.mp4">O_que_é_e_como_funciona_a_internet.mp4</a><span>MP4</span></li><li data-searchable data-search="fdb09a686c523c62cc48cf2dbb349519_1752903476536.mp4 recursos multimédia"><a href="./multi_midia/video/fdb09a686c523c62cc48cf2dbb349519_1752903476536.mp4">fdb09a686c523c62cc48cf2dbb349519_1752903476536.mp4</a><span>MP4</span></li></ul>
+        <div class="folder-links"><a href="./multi_midia/README.md">Ver índice multimédia</a></div>
+      </div>
+      <div class="folder-links">
+        <a href="./desafio/README.md">Índice de desafios</a>
+        <a href="./exerc%C3%ADcios/README.md">Índice de exercícios</a>
+        <a href="./LICENSE">Licença existente</a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <span><strong>Benjamim Tanislau José Cacuengue</strong> · Repositório pessoal de aprendizagem em HTML5 e CSS3.</span>
+      <a href="./README.md">Sobre este repositório</a>
+    </div>
+  </footer>
+  <noscript><p class="shell note">A pesquisa e as animações suaves usam JavaScript; as ligações permanecem disponíveis sem JavaScript.</p></noscript>
+  <script>
+    (() => {
+      const search = document.getElementById('catalog-search');
+      const controls = document.querySelector('[data-filter-controls]');
+      const items = Array.from(document.querySelectorAll('[data-searchable]'));
+      const status = document.getElementById('filter-status');
+      const empty = document.querySelector('[data-no-results]');
+
+      if (search && controls) {
+        controls.hidden = false;
+        const update = () => {
+          const term = search.value.trim().toLocaleLowerCase('pt-PT');
+          let visible = 0;
+          items.forEach((item) => {
+            const haystack = (item.dataset.search || item.textContent).toLocaleLowerCase('pt-PT');
+            const matches = !term || haystack.includes(term);
+            item.hidden = !matches;
+            if (matches) visible += 1;
+          });
+          if (status) status.textContent = term ? `${visible} resultado(s)` : `${visible} itens disponíveis`;
+          if (empty) empty.hidden = visible !== 0;
+        };
+        search.addEventListener('input', update);
+        update();
+      }
+
+      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduceMotion && 'IntersectionObserver' in window) {
+        document.documentElement.classList.add('motion-ready');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element));
+      }
+    })();
+  </script>
+</body>
+</html>
